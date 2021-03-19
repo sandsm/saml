@@ -14,10 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-//import org.springframework.security.saml2.provider.service.registration.InMemoryRelyingPartyRegistrationRepository;
-//import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistration;
-//import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository;
-//import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrations;
+import org.springframework.security.saml2.provider.service.registration.InMemoryRelyingPartyRegistrationRepository;
+import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistration;
+import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository;
+import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrations;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
@@ -100,7 +100,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.rememberMeCookieName("remember")
 				.tokenRepository(tokenRepository())
 				.and()
-			.formLogin()
+/*
+				.formLogin()
 				.defaultSuccessUrl(Util.getHomeUrl())
 				.loginPage(Util.getLoginUrl())
 				.loginProcessingUrl("/loginAttempt")
@@ -110,6 +111,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl(Util.getSkyveContextUrl() + "/loggedOut")
 				.deleteCookies("JSESSIONID")
 				.and()
+*/
 			.csrf().disable()
 			.headers()
 				.httpStrictTransportSecurity().disable()
@@ -121,23 +123,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 					(UtilImpl.AUTHENTICATION_GITHUB_CLIENT_ID != null)) {
 				http.oauth2Login().loginPage(Util.getLoginUrl());
 			}
-//			http.saml2Login();
+			http.saml2Login();
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/h2/**", "/rest/**");
 	}
-/*
+
 	@Bean
+	@SuppressWarnings("static-method")
 	public RelyingPartyRegistrationRepository relyingPartyRegistrationRepository() {
 		RelyingPartyRegistration relyingPartyRegistration = RelyingPartyRegistrations
-				.fromMetadataLocation("https://simplesaml-for-spring-saml.cfapps.io/saml2/idp/metadata.php")
-				.registrationId("one")
+				.fromMetadataLocation("https://login.microsoftonline.com/b643c254-8bbf-4dac-94a8-40a13db11d38/federationmetadata/2007-06/federationmetadata.xml?appid=a463e416-2364-4cdc-a2c9-6f282b5b7bad")
+				.registrationId("test")
 				.build();
 		return new InMemoryRelyingPartyRegistrationRepository(relyingPartyRegistration);
 	}
-*/
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return skyve.passwordEncoder();
