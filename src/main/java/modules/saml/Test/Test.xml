@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.skyve.org/xml/document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Test" xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
+    <persistent name="SAM_Test"/>
+    <singularAlias>Test</singularAlias>
+    <pluralAlias>Tests</pluralAlias>
+    <bizKey expression="Test - {test}"/>
+    <attributes>
+        <boolean required="true" name="test">
+            <displayName>test</displayName>
+        </boolean>
+    </attributes>
+</document>
