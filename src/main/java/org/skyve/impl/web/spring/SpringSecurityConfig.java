@@ -137,6 +137,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		RelyingPartyRegistration relyingPartyRegistration = RelyingPartyRegistrations
 				.fromMetadataLocation("https://login.microsoftonline.com/b643c254-8bbf-4dac-94a8-40a13db11d38/federationmetadata/2007-06/federationmetadata.xml?appid=a463e416-2364-4cdc-a2c9-6f282b5b7bad")
 				.registrationId("test")
+				.entityId("https://{baseHost}/saml2/service-provider-metadata/{registrationId}")
+				.assertionConsumerServiceLocation("https://{baseHost}/saml/login/saml2/sso/{registrationId}")
 				.build();
 		return new InMemoryRelyingPartyRegistrationRepository(relyingPartyRegistration);
 	}
