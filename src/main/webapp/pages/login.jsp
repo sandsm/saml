@@ -246,7 +246,7 @@
 									<div class="ui red button">
 										<i class="microsoft icon"></i>
 									</div>
-									<a href="saml2/authenticate/test" class="ui basic red left pointing label">Google</a>
+									<a href="saml2/authenticate/test" class="ui basic red left pointing label">Azure Login</a>
 								</div>
 							</div>
 						</div>
