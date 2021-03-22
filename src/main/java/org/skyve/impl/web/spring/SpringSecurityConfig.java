@@ -100,8 +100,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.rememberMeCookieName("remember")
 				.tokenRepository(tokenRepository())
 				.and()
-/*
-				.formLogin()
+			.formLogin()
 				.defaultSuccessUrl(Util.getHomeUrl())
 				.loginPage(Util.getLoginUrl())
 				.loginProcessingUrl("/loginAttempt")
@@ -111,7 +110,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl(Util.getSkyveContextUrl() + "/loggedOut")
 				.deleteCookies("JSESSIONID")
 				.and()
-*/
 			.csrf().disable()
 			.headers()
 				.httpStrictTransportSecurity().disable()
@@ -123,7 +121,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 					(UtilImpl.AUTHENTICATION_GITHUB_CLIENT_ID != null)) {
 				http.oauth2Login().loginPage(Util.getLoginUrl());
 			}
-			http.saml2Login();
+			http.saml2Login()
+				.loginPage(Util.getLoginUrl())
+				.defaultSuccessUrl(Util.getHomeUrl());
 	}
 
 	@Override
